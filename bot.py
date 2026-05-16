@@ -2,7 +2,7 @@ import os
 import json
 import asyncio
 from dotenv import load_dotenv
-from apify_client import ApifyClient
+from apify_client import ApifyClientAsync
 import telegram
 
 load_dotenv()
@@ -32,15 +32,17 @@ def save_last_seen(data):
         json.dump(data, f, indent=2)
 
 
-def scrape_instagram():
-    client = ApifyClient(APIFY_TOKEN)
+async def scrape_instagram():
+    client = ApifyClientAsync(APIFY_TOKEN)
     run_input = {
         "usernames": INSTAGRAM_ACCOUNTS,
         "resultsLimit": 5
     }
     print("Starte Apify Scraper...")
-    run = client.actor("apify/instagram-profile-scraper").call(run_input=run_input)
-    items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
+    run = await client.actor("apify/instagram-profile-scraper").call(run_input=run_input)
+    items = []
+    async for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+        items.append(item)
     print(f"{len(items)} Profile geladen.")
     return items
 
@@ -52,7 +54,7 @@ async def send_message(text):
 
 async def main():
     last_seen = load_last_seen()
-    profiles = scrape_instagram()
+    profiles = await scrape_instagram()
 
     lines = ["📊 Instagram Tagesreport\n"]
 
