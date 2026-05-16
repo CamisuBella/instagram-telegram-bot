@@ -12,13 +12,21 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 APIFY_TOKEN = os.getenv("APIFY_TOKEN")
 
 INSTAGRAM_ACCOUNTS = [
+    # Deutsch
     "taliamenzel",
     "tina_schwarz.lipoedem_talk",
     "lipoedemkeinproblem",
     "mama_undmeer",
     "judithsendl",
     "belanda.feelgood",
-    "zuckerfreierlei"
+    "zuckerfreierlei",
+    # Englisch
+    "rachel.lipedema.coach",
+    "the_lippy_lady",
+    "lipedemasociety",
+    "mylipedemajourney",
+    "lipedemafitness",
+    "lipedema_uplifted",
 ]
 
 LAST_SEEN_FILE = os.path.join(os.path.dirname(__file__), "last_seen.json")
