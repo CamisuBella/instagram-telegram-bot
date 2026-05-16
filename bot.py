@@ -14,7 +14,11 @@ APIFY_TOKEN = os.getenv("APIFY_TOKEN")
 INSTAGRAM_ACCOUNTS = [
     "taliamenzel",
     "tina_schwarz.lipoedem_talk",
-    "lipoedemkeinproblem"
+    "lipoedemkeinproblem",
+    "mama_undmeer",
+    "judithsendl",
+    "belanda.feelgood",
+    "zuckerfreierlei"
 ]
 
 LAST_SEEN_FILE = os.path.join(os.path.dirname(__file__), "last_seen.json")
