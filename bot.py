@@ -21,7 +21,7 @@ INSTAGRAM_ACCOUNTS = [
     "belanda.feelgood",
     "zuckerfreierlei",
     # Englisch
-    "rachel.lipedema.coach",
+    "lipedema.coach",
     "the_lippy_lady",
     "lipedemasociety",
     "mylipedemajourney",
