@@ -68,7 +68,7 @@ async def main():
     last_seen = load_last_seen()
     profiles = await scrape_instagram()
 
-    lines = ["📊 Instagram Tagesreport\n"]
+    await send_message("📊 Instagram Tagesreport")
 
     for profile in profiles:
         username = profile.get("username", "unbekannt")
@@ -83,7 +83,7 @@ async def main():
             new_posts.append(post)
 
         if new_posts:
-            lines.append(f"@{username} — {len(new_posts)} neuer Beitrag(e):")
+            lines = [f"@{username} — {len(new_posts)} neuer Beitrag(e):"]
             for post in new_posts[:3]:
                 caption = (post.get("caption") or "")[:120]
                 url = post.get("url", "")
@@ -91,17 +91,14 @@ async def main():
                 if url:
                     lines.append(f"  {url}")
             last_seen[username] = latest_posts[0].get("id") if latest_posts else last_id
+            await send_message("\n".join(lines))
         else:
-            lines.append(f"@{username} — Keine neuen Beiträge")
-
-        lines.append("")
+            await send_message(f"@{username} — Keine neuen Beiträge")
 
     save_last_seen(last_seen)
-
-    message = "\n".join(lines)
-    await send_message(message)
     print("Report gesendet!")
-    print(message)
+
+    print("Report gesendet!")
 
 
 if __name__ == "__main__":
